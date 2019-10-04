@@ -1,0 +1,54 @@
+import RPi.GPIO
+import time
+GPIO.setmode(GPIO.BOARD)
+
+led1=29
+led2=31
+led3=33
+led4=35
+led5=36
+led6=37
+led7=38
+led8=40
+
+GPIO.setup(led1,GPIO.OUT)
+GPIO.setup(led2,GPIO.OUT)
+GPIO.setup(led3,GPIO.OUT)
+GPIO.setup(led4,GPIO.OUT)
+GPIO.setup(led5,GPIO.OUT)
+GPIO.setup(led6,GPIO.OUT)
+GPIO.setup(led7,GPIO.OUT)
+GPIO.setup(led8,GPIO.OUT)
+
+GPIO.output(led1,False)
+GPIO.output(led2,False)
+GPIO.output(led3,False)
+GPIO.output(led4,False)
+GPIO.output(led5,False)
+GPIO.output(led6,False)
+GPIO.output(led7,False)
+GPIO.output(led8,False)
+
+def ledpattern(val1,val2,val3,val4,val5,val6,val7,val8):
+	GPIO.output(led1,val1)
+	GPIO.output(led2,val2)
+	GPIO.output(led3,val3)
+	GPIO.output(led4,val4)
+	GPIO.output(led5,val5)
+	GPIO.output(led6,val6)
+	GPIO.output(led7,val7)
+	GPIO.output(led8,val8)
+	
+def patternOne():
+	for i in range(0,3):
+		ledpattern(1,0,1,0,1,0,1,0)
+		time.sleep(0.1)
+		ledpattern(0,1,0,1,0,1,0,1)
+		time.sleep(0.1)
+		
+try:
+	while True:
+		patternOne()
+		
+finally:
+	GPIO.cleanup()

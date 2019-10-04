@@ -1,0 +1,19 @@
+from time import sleep
+import tm1637
+
+try:
+	import thread
+except ImportError:
+	import _thread as thread
+	
+Display = tm1637.TM1637(CLK=21,DIO=20,brightness=1.0)
+
+try:
+	print "Starting clock in the background..!"
+	Display.StartClock()
+	sleep(5)
+	Display.StopClock()
+	thread.interrupt_main()
+except KeyboardInterrupt:
+	print "Terminating the clock"
+	Display.cleanup()
